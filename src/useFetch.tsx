@@ -7,7 +7,11 @@ export const useFetch = (url: any) => {
 
     fetch(url)
       .then(x => x.text())
-      .then(y => setState({ data: y, loading: true }));
+      .then(y =>
+        setTimeout(() => {
+          setState({ data: y, loading: true });
+        }, 2000)
+      );
   }, [url, setState]);
 
   return state;
