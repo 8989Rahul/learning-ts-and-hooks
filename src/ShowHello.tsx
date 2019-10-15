@@ -5,7 +5,7 @@ let num = localStorage.getItem("count");
 export const ShowHello = () => {
   const render = useRef(0);
   const [count, setCount] = useState(() => JSON.parse(num ? num : "0"));
-  const { data, loading } = useFetch(`http://numbersapi.com/${count}/trivia`);
+  const { data } = useFetch(`http://numbersapi.com/${count}/trivia`);
 
   useEffect(() => {
     localStorage.setItem("count", JSON.stringify(count));
