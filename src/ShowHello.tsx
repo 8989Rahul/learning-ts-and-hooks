@@ -1,23 +1,35 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useFetch } from "./useFetch";
-let num = localStorage.getItem("count");
+import React, { useRef } from "react";
+import { useForm } from "./useForm";
 
-export const ShowHello = () => {
-  const render = useRef(0);
-  const [count, setCount] = useState(() => JSON.parse(num ? num : "0"));
-  const { data } = useFetch(`http://numbersapi.com/${count}/trivia`);
+export const ShowHello = React.memo(({ increment }: { increment: any }) => {
+  useForm();
 
-  useEffect(() => {
-    localStorage.setItem("count", JSON.stringify(count));
-  }, [count]);
+  return <button onClick={increment}>Hello</button>;
+});
 
-  console.log("render", render.current++);
+// import React, { useState, useEffect } from "react";
+// import { useForm } from "./useForm";
+// import { useMeasure } from "./useMeasure";
+// let num = localStorage.getItem("count");
 
-  return (
-    <div>
-      <p>{!data ? "Loangin..." : data}</p>
-      <h2>{count}</h2>
-      <button onClick={() => setCount((c: any) => c + 1)}>Increament</button>
-    </div>
-  );
-};
+// export const ShowHello = () => {
+//   const [count, setCount] = useState(() => JSON.parse(num ? num : "0"));
+//   const { data } = useForm(`http://numbersapi.com/${count}/trivia`);
+
+//   useEffect(() => {
+//     localStorage.setItem("count", JSON.stringify(count));
+//   }, [count]);
+
+//   const [rect, divRef] = useMeasure(data);
+
+//   return (
+//     <div>
+//       <div style={{ display: "flex" }}>
+//         <div ref={divRef}>{!data ? "Loading..." : data}</div>
+//       </div>
+//       <pre>{JSON.stringify(rect, null, 2)}</pre>
+//       <h2>{count}</h2>
+//       <button onClick={() => setCount((c: any) => c + 1)}>Increament</button>
+//     </div>
+//   );
+// };
